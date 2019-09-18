@@ -1,5 +1,3 @@
-
-
 class Phrase:
     """
     Phrase instance is to handle the creation of phrases
