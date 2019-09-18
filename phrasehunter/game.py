@@ -23,9 +23,9 @@ class Game:
     """
     def __init__(self):
         self.__char_list = []
-        self.word = random.choice(WORDS)
+        self.__word = random.choice(WORDS)
 
-        for char in self.word:
+        for char in self.__word:
             self.__char_list.append(Character(char))
 
         self.__phrases = Phrase(self.__char_list)
@@ -56,7 +56,7 @@ class Game:
                         if self.__phrases.all_guessed():
                             print('\n----------------------------------\n')
                             print('You win!')
-                            print('The answer is "{}"'.format(self.word))
+                            print('The answer is "{}"'.format(self.__word))
                             print('\n----------------------------------\n')
                             break
 
@@ -70,7 +70,7 @@ class Game:
                         if self.__lives == 0:
                             print('\n----------------------------------\n')
                             print('You lose!')
-                            print('The answer is "{}"'.format(self.word))
+                            print('The answer is "{}"'.format(self.__word))
                             print('\n----------------------------------\n')
                             break
 
