@@ -14,6 +14,7 @@ class Game:
     determining if a win/loss happens after the player runs out of turns
     or the phrase is completely guessed.
     """
+
     def __init__(self, phrases: Phrase):
         self.__phrases = phrases
         self.__word = ''.join(self.__phrases.original())
@@ -34,7 +35,8 @@ class Game:
                     raise ValueError
 
                 else:
-                    guess_check = list(map(lambda x: x.guess(gss), self.__phrases.phrase))
+                    guess_check = list(
+                        map(lambda x: x.guess(gss), self.__phrases.phrase))
 
                     if any(guess_check):
                         print('\n----------------------------------\n')
@@ -53,7 +55,8 @@ class Game:
                         print('\n----------------------------------\n')
                         print('Yor guess is not correct..\n')
                         print(*self.__phrases.show())
-                        print('\nYou have {} out of 5 lives remaining!'.format(self.__lives))
+                        print('\nYou have {} out of 5 lives remaining!'.format(
+                            self.__lives))
 
                         if self.__lives == 0:
                             print('\n----------------------------------\n')
