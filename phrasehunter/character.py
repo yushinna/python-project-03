@@ -2,6 +2,7 @@ class Character:
     """
     The Character instance is responsible for holding the state of a given single character.
     """
+
     def __init__(self, char: str):
         self.original = char
         self.was_guessed = False
