@@ -2,6 +2,7 @@ class Phrase:
     """
     Phrase instance is to handle the creation of phrases
     """
+
     def __init__(self, phrase: list):
         """
         phrase: list, a collection of Character objects
