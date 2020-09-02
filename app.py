@@ -1,12 +1,9 @@
-from phrasehunter import (
-    game, set_phrase, restart
-)
+from phrasehunter import game
 
 
 if __name__ == '__main__':
     while True:
-        phrase = set_phrase()
-        play = game.Game(phrase)
+        play = game.Game()
         play.start()
-        if not restart():
+        if not play.restart():
             break
