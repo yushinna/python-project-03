@@ -1,16 +1,16 @@
+from .character import Character
+
+
 class Phrase:
     """
     Phrase instance is to handle the creation of phrases
     """
 
-    def __init__(self, phrase: list):
+    def __init__(self, word: str):
         """
-        phrase: list, a collection of Character objects
+        phrase: string
         """
-        self.phrase = phrase
-
-    def original(self):
-        return list(map(lambda x: x.original, self.phrase))
+        self.phrase = [Character(letter) for letter in word]
 
     def all_guessed(self) -> bool:
         if all(list(map(lambda x: x.was_guessed, self.phrase))):
