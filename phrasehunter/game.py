@@ -1,6 +1,12 @@
 import os
 import re
+import random
 from .phrase import Phrase
+
+
+with open('./phrasehunter/wordlist.txt') as f:
+    data = f.read()
+    word_list = data.strip().split(',')
 
 
 def clear_screen():
@@ -15,9 +21,9 @@ class Game:
     or the phrase is completely guessed.
     """
 
-    def __init__(self, phrases: Phrase):
-        self.__phrases = phrases
-        self.__word = ''.join(self.__phrases.original())
+    def __init__(self):
+        self.__word = random.choice(word_list)
+        self.__phrases = Phrase(self.__word)
         self.__lives = 5
 
     def start(self):
@@ -27,8 +33,9 @@ class Game:
         print("----------------------------------")
 
         while not self.__phrases.all_guessed():
+            print(*self.__phrases.show())
             print('\n----------------------------------\n')
-            gss = input('Guess a letter: ')
+            gss = input('Guess a letter: ').lower()
 
             try:
                 if not re.match('[a-z]+', gss) or len(gss) != 1:
@@ -41,7 +48,6 @@ class Game:
                     if any(guess_check):
                         print('\n----------------------------------\n')
                         print('your guess is correct!\n')
-                        print(*self.__phrases.show())
 
                         if self.__phrases.all_guessed():
                             print('\n----------------------------------\n')
@@ -53,9 +59,8 @@ class Game:
                     if not any(guess_check):
                         self.__lives -= 1
                         print('\n----------------------------------\n')
-                        print('Yor guess is not correct..\n')
-                        print(*self.__phrases.show())
-                        print('\nYou have {} out of 5 lives remaining!'.format(
+                        print('Yor guess is not correct..')
+                        print('\nYou have {} out of 5 lives remaining!\n'.format(
                             self.__lives))
 
                         if self.__lives == 0:
@@ -66,6 +71,24 @@ class Game:
                             break
 
             except ValueError:
-                print('Please input a single lowercase character string! '
+                print('Please input a single character string! '
                       'Received: %s' % gss)
                 input('\nPress ENTER to continue.. ')
+
+    def restart(self):
+        while True:
+            try:
+                replay = input('Do you want to play again? [y]es or [n]o: ')
+
+                if replay.lower() == 'n' or replay.lower() == 'no':
+                    print('\nThank you! See you next time!\n')
+                    return False
+
+                if replay.lower() == 'y' or replay.lower() == 'yes':
+                    return True
+
+                else:
+                    raise ValueError
+
+            except ValueError:
+                print('\nThat was no valid input! Try again..\n')
